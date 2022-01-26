@@ -4,7 +4,7 @@ Daremos início ao seu cadastro em nosso banco de uma forma simples, fácil e r�
 
 Precisaremos de algumas informações, então separe seus documentos como RG, CPF e comprovante de renda para começarmos. 
 
-Pronto? Então clique em Ok e divirta-se!`)
+Pronto? Então clique em OK.`)
 
 class Cliente {
     constructor () {
@@ -41,6 +41,8 @@ Saldo atual: R$ ${Number(this.saldo).toFixed(2).replace(".", ",")}
 Deseja retornar ao menu de opções?`)) {
         opcoes()
         } else {
+            alert(`Saindo...`)
+            auth()
         }}
     }
 
@@ -51,27 +53,35 @@ R$ ${Number(this.saldo).toFixed(2).replace(".", ",")}
 
 Deseja voltar ao menu de opções?`)) {
     opcoes()
-}}
-    
+    } else {
+        alert(`Saindo...`)
+        auth()
+    }}
 }
-
+    
 const CADASTRO = {
     cadastrarNome: function() {
         const erro = new Error(`Digite um nome válido.`)
         const nome = prompt("Digite seu nome:")
+        const regexNome = /^[a-záàâãéèêíïóôõöúçñ]+$/i
     
-        if (nome === "" || nome === Number(nome)) {
+        if (nome === "" || !nome.match(regexNome)) {
             alert(erro)
             this.cadastrarNome()
+        } else {
+            return nome
         }
     },
     cadastrarSobrenome: function() {
         const erro = new Error(`Digite um sobrenome válido.`)
         const sobrenome = prompt("Digite seu sobrenome:")
+        const regexSobrenome = /^[a-záàâãéèêíïóôõöúçñ]+$/i
     
-        if (sobrenome === "" || Number(sobrenome) === Number) {
+        if (sobrenome === "" || !sobrenome.match(regexSobrenome)) {
             alert(erro)
             this.cadastrarSobrenome()
+        } else {
+            return sobrenome
         }
     },
     cadastrarCPF: function() {
@@ -82,6 +92,8 @@ const CADASTRO = {
         if (!cpf.match(regexCPF)) {
             alert(erro)
             this.cadastrarCPF()
+        } else {
+            return cpf
         }
     },
     cadastrarRG: function() {
@@ -92,6 +104,8 @@ const CADASTRO = {
         if (!rg.match(regexRG)) {
             alert(erro)
             this.cadastrarRG()
+        } else {
+            return rg
         }
     },
     cadastrarCelular: function() {
@@ -102,15 +116,21 @@ const CADASTRO = {
         if (!celular.match(regexCelular)) {
             alert(erro)
             this.cadastrarCelular()
+        } else {
+            return celular
         }
     },
     cadastrarRenda: function() {
         const erro = new Error(`Digite uma renda válida.`)
-        const renda = Number(prompt("Digite o valor da sua renda mensal:")).toFixed(2)
+        const renda = (prompt("Digite o valor da sua renda mensal:"))
+        const regexRenda = /^[a-záàâãéèêíïóôõöúçñ ]+$/i
+
     
-        if (renda === "" || renda === String) {
+        if (renda === "" || renda.match(regexRenda)) {
             alert(erro)
             this.cadastrarRenda()
+        } else {
+            return renda
         }
     },
     cadastrarEmail: function() {
@@ -121,6 +141,8 @@ const CADASTRO = {
         if (!email.match(regexEmail)) {
             alert(erro)
             this.cadastrarEmail()
+        } else {
+            return email
         }
     },
     cadastrarSenha: function() {
@@ -130,16 +152,22 @@ const CADASTRO = {
         if (senha === "") {
             alert(erro)
             this.cadastrarSenha()
+        } else {
+            return senha
         }
     },
     
 }
 
+const EDUARDO = new Cliente()
+
 function auth() {
     const authEmail = prompt(`PÁGINA DE LOGIN
-    Email:`)
+
+Email:`)
     const authSenha = prompt(`PÁGINA DE LOGIN
-    Senha:`)
+
+Senha:`)
 
     if (authEmail === EDUARDO.email && authSenha === EDUARDO.senha) {
         alert(`Você foi logado com sucesso.`)
@@ -150,8 +178,6 @@ function auth() {
         this.auth()
     }
 } 
-
-const EDUARDO = new Cliente()
 auth()
 
 function opcoes() {
@@ -166,8 +192,10 @@ function opcoes() {
             break;
         case "2": 
             EDUARDO.verSaldo()
+            break
+        case "X": 
+            auth()
         default:
             break;
     }
 }
-
