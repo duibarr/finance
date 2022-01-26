@@ -1,2 +1,2 @@
 # Finance
-Projeto de ChatBot de um banco fictício usando métodos de alert( ), prompt( ) e confirm( ) do HTML, além das funcionalidades em JavaScript.
+Projeto de ChatBot de um banco fictício usando métodos de alert( ), prompt( ) e confirm( ) no HTML, além das funcionalidades em JavaScript.
